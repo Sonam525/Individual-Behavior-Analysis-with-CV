@@ -94,44 +94,39 @@ Video Input
 ## Pipeline Components
 
 ### 1. Frame Extraction
-- **Notebook**: `Frames_Decoding.ipynb`
+- **Notebook**: `1_Video_Decoding.ipynb`
 - Extracts frames from video with timestamp preservation
 - Outputs: Decoded frames organized by video segments
 
 ### 2a. Object Detection (Optional)
-- **Notebook**: `OWLV.ipynb` or `YOLO.ipynb`
+- **Notebook**: `2_OWLV.ipynb` or `2_YOLO.ipynb`
 - Zero-shot detection using OWLv2 or traditional YOLO
 - Outputs: Bounding box annotations
 
-### 2b. Segmentation & Tracking
+### 3. Segmentation & Tracking
 - **Notebooks**: 
-  - `Samurai_Usage_cleaned.ipynb` - SAM2 segmentation and tracking
-  - `Samurai_Output_Verification.ipynb` - Quality verification
+  - `3_Samurai_Usage_cleaned.ipynb` - SAM2 segmentation and tracking
+  - `3.5_Samurai_Output_Verification.ipynb` - Quality verification
 - Outputs: Tracked object masks across frames
 
-### 3. Frame Cropping
-- **Notebook**: `Cropping_the_frames_using_annotations.ipynb`
+### 4. Frame Cropping
+- **Notebook**: `4_Cropping_the_frames_using_annotations.ipynb`
 - Crops individual animal frames based on segmentation masks
 - Outputs: Individual cropped frames per tracked object
 
-### 4. OCR & Metadata
-- **Notebook**: `Metadata.ipynb`
-- Extracts timestamp information from video frames using OCR
-- Aligns detections with ground truth labels
-
 ### 5. Feature Extraction
-- **Notebook**: `Embedding_Extraction_DinoV2.ipynb`
+- **Notebook**: `5_Embedding_Extraction_DinoV2.ipynb`
 - Extracts DINOv2 embeddings from cropped frames
 - Parallel processing for efficient extraction
 - Outputs: `.pt` files containing feature vectors
 
-### 6. Final Metadata Generation
-- **Notebook**: `Generate_the_Final_Metadata.ipynb`
+### 6. OCR + Final Metadata Generation
+- **Notebook**: `7_final_metadata_for_classification.ipynb` and `6_OCR_Metadata.ipynb`
 - Merges all metadata sources (OCR, ground truth, embeddings)
 - Outputs: Comprehensive CSV with frame paths, labels, and embedding paths
 
 ### 7. Classification
-- **Notebook**: `MLP_Classifer.ipynb`
+- **Notebook**: `8_MLP_Classifer.ipynb`
 - Trains MLP classifier on extracted embeddings
 - Includes early stopping and evaluation metrics
 - Supports multi-class behavior classification
@@ -209,16 +204,15 @@ Key parameters to adjust in notebooks:
 
 ```
 .
-├── Frames_Decoding.ipynb                      # Step 1: Video frame extraction
-├── OWLV.ipynb                                 # Step 2a: OWLv2 object detection
-├── YOLO.ipynb                                 # Step 2a: YOLO detection (alternative)
-├── Samurai_Usage_cleaned.ipynb                # Step 2b: SAM2 segmentation
-├── Samurai_Output_Verification.ipynb          # Step 2b: Verification
-├── Cropping_the_frames_using_annotations.ipynb # Step 3: Frame cropping
-├── Metadata.ipynb                             # Step 4: OCR & timestamp extraction
-├── Embedding_Extraction_DinoV2.ipynb          # Step 5: Feature extraction
-├── Generate_the_Final_Metadata.ipynb          # Step 6: Metadata merging
-├── MLP_Classifer.ipynb                        # Step 7: Behavior classification
+├── 1_Video_Decoding.ipynb                      # Step 1: Video frame extraction
+├── 2_OWLV.ipynb                                 # Step 2a: OWLv2 object detection
+├── 2_YOLO.ipynb                                 # Step 2a: YOLO detection (alternative)
+├── 3_Samurai_Usage_cleaned.ipynb                # Step 3: SAM2 segmentation
+├── 3.5_Samurai_Output_Verification.ipynb          # Step 3b: Verification
+├── 4_Cropping_the_frames_using_annotations.ipynb # Step 4: Frame cropping
+├── 5_Embedding_Extraction_DinoV2.ipynb          # Step 5: Feature extraction
+├── 7_final_metadata_for_classification.ipynb & 6_OCR_Metadata.ipynb    # Step 6: Metadata merging
+├── 8_MLP_Classifer.ipynb                        # Step 7: Behavior classification
 ├── Images/
 │   └── Fig 1.jpg                              # Pipeline visualization
 └── README.md

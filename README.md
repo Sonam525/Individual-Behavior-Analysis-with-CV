@@ -140,7 +140,7 @@ Video Input
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/livestock-behavior-detection.git
+git clone https://github.com/Sonam525/livestock-behavior-detection.git
 cd livestock-behavior-detection
 
 # Install dependencies
